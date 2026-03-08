@@ -10,7 +10,7 @@
 body{
 margin:0;
 font-family:Arial, Helvetica, sans-serif;
-background:#f5f5f5;
+background:linear-gradient(180deg, #dff6ff 0%, #e9fff1 100%);
 color:#111;
 text-align:center;
 padding:24px;
@@ -98,23 +98,20 @@ color:#444;
 
 <div class="subtitle">
 Saturday, April 18 • 2:00 PM<br>
-Hosted by Buster 🐾
+Hosted by Buster
 </div>
 
 <div class="video-box">
-
 <iframe
 src="https://player.vimeo.com/video/1171513583"
 allow="autoplay; fullscreen; picture-in-picture"
 allowfullscreen>
 </iframe>
-
 </div>
 
 <h2>Countdown to Lab-a-Palooza</h2>
 
 <div class="countdown">
-
 <div class="time">
 <div class="time-number" id="days">0</div>
 <div class="time-label">Days</div>
@@ -134,69 +131,44 @@ allowfullscreen>
 <div class="time-number" id="seconds">0</div>
 <div class="time-label">Seconds</div>
 </div>
-
 </div>
 
 <div class="details">
-
 <strong>Prospect Park</strong><br>
 95 Prospect Park W<br>
 Brooklyn, NY
-
-<br><br>
-
-It's that time of year again…  
-Lab-a-Palooozaaaaa 🎾✨💫  
-
-Buster is currently working on eating all the snow in the park so it will be warm and green for his birthday.
-
-<br><br>
-
-Meet us at Prospect Park (more detailed location to come) to celebrate Buster.
-
-<br><br>
-
-We'll have lots of drinks and snacks, but please bring your own drinks, snacks, and a picnic blanket.
-
-<br><br>
-
-We'll also head back to our place or a bar afterward to keep the celebration going.
-
-<br><br>
-
-Invite your friends.
-
 </div>
 
 </div>
 
 <script>
-
-const partyDate = new Date("2026-04-18T14:00:00")
+const partyDate = new Date("2026-04-18T14:00:00");
 
 function updateCountdown(){
+  const now = new Date();
+  const diff = partyDate - now;
 
-const now = new Date()
+  if(diff <= 0){
+    document.getElementById("days").textContent = 0;
+    document.getElementById("hours").textContent = 0;
+    document.getElementById("minutes").textContent = 0;
+    document.getElementById("seconds").textContent = 0;
+    return;
+  }
 
-const diff = partyDate - now
+  const days = Math.floor(diff/(1000*60*60*24));
+  const hours = Math.floor((diff/(1000*60*60))%24);
+  const minutes = Math.floor((diff/(1000*60))%60);
+  const seconds = Math.floor((diff/1000)%60);
 
-if(diff <= 0){return}
-
-const days = Math.floor(diff/(1000*60*60*24))
-const hours = Math.floor((diff/(1000*60*60))%24)
-const minutes = Math.floor((diff/(1000*60))%60)
-const seconds = Math.floor((diff/1000)%60)
-
-document.getElementById("days").textContent = days
-document.getElementById("hours").textContent = hours
-document.getElementById("minutes").textContent = minutes
-document.getElementById("seconds").textContent = seconds
-
+  document.getElementById("days").textContent = days;
+  document.getElementById("hours").textContent = hours;
+  document.getElementById("minutes").textContent = minutes;
+  document.getElementById("seconds").textContent = seconds;
 }
 
-setInterval(updateCountdown,1000)
-updateCountdown()
-
+setInterval(updateCountdown,1000);
+updateCountdown();
 </script>
 
 </body>
